@@ -102,3 +102,12 @@ pub unsafe fn deep_clone(a: ocaml::Value) -> ocaml::Value {
 pub fn pair_vec() -> ocaml::Value {
     vec![("foo", 1), ("bar", 2isize)].into_value(gc)
 }
+
+#[ocaml::native_func]
+pub fn string_array() -> ocaml::Value {
+    let mut v = vec![];
+    for i in 1..10000000 {
+        v.push(format!("foo {}", i));
+    }
+    v.into_value(gc)
+}
